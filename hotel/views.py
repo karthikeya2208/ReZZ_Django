@@ -28,19 +28,20 @@ def reservation_confirmation(request):
         reservation = Reservation(
             hotel_name=data['hotel_name'],
             checkin=data['checkin'],
-            checkout=data['checkout']
+            checkout=data['checkout'],
+            name=data['name'],               
+            amount=data['amount']     
         )
         reservation.save()
         print(f"Reservation ID: {reservation.id}")
         
-        # Save each guest
-#        for guest_data in data['guests_list']:
-#            guest = Guest(
-#                reservation=reservation,
-#                name=guest_data['name'],
-#                gender=guest_data['gender']
-#            )
-#            guest.save()
+       # Save each guest
+        for guest_data in data['guests_list']:
+            Guest.objects.create(
+                reservation=reservation,
+                name=guest_data['name'],
+                gender=guest_data['gender']
+            )
 
         return Response(reservation.confirmation_number, status=status.HTTP_201_CREATED)
 

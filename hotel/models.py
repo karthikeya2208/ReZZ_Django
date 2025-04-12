@@ -14,6 +14,9 @@ class Reservation(models.Model):
     hotel_name = models.CharField(max_length=255)
     checkin = models.DateField()
     checkout = models.DateField()
+    name = models.CharField(max_length=255, default="Unknown")
+    amount = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+
     confirmation_number = models.CharField(max_length=20, unique=True, blank=True)
 
     def save(self, *args, **kwargs):

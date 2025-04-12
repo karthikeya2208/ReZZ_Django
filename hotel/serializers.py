@@ -15,6 +15,8 @@ class ReservationSerializer(serializers.Serializer):
     hotel_name = serializers.CharField(max_length=255)
     checkin = serializers.DateField()
     checkout = serializers.DateField()
+    name = serializers.CharField(max_length=255)  # NEW
+    amount = serializers.DecimalField(max_digits=8, decimal_places=2)  # NEW
     guests_list = serializers.ListSerializer(
         child=GuestSerializer()
     )
